@@ -1,3 +1,3 @@
-<script src='Phaser.js'></script>
+<script src='phaser.js'></script>
 
 <script src='loader.js'></script>
