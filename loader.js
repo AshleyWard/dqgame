@@ -11,12 +11,12 @@ var scripts = [];
 	SCRIPTNAME.src = 'FILELOCATION.js';
 */
 
-scripts.push(dsGame = document.createElement('script'));
+scripts.push(dqGame = document.createElement('script'));
 scripts.push(characters = document.createElement('script'));
 scripts.push(enemies = document.createElement('script'));
 scripts.push(background = document.createElement('script'));
 
-dsGame.src = 'dsgame.js';
+dqGame.src = 'dqgame.js';
 characters.src = 'characters.js';
 enemies.src = 'enemies.js';
 background.src = 'background.js';
