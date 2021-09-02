@@ -12,7 +12,7 @@ background = {
 		
 		starList: [],
 		
-		speed: 2,
+		speed: 3,
 		frequency: 5,
 	
 		newStar (scene) {
