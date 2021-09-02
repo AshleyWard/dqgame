@@ -20,7 +20,7 @@ background = {
 			let tempStar = scene.add.star(background.width + 20, this.randomY(), 4, this.randomInnerRadius(), this.randomOuterRadius(), 0xFFFFFF);		//Keep innerradius under 8
 			
 			tempStar.angle = this.randomRotation();
-			tempStar.alpha *= Math.random() * 1;
+			tempStar.alpha *= Math.random() * 0.9;
 			
 			this.starList.push(tempStar);
 			
