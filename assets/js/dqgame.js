@@ -1,4 +1,3 @@
-
 // =============
 // Main // Setup
 // =============
@@ -50,12 +49,8 @@ let gameState = {					//Currently unused
     selectedColor: 0x844cc5
 }
 
-
 var cursors;
 var player;
-var board;
-var shape;
-var pickup;
 
 var background 	= document.createElement('background.js');
 var characters 	= document.createElement('characters.js');
