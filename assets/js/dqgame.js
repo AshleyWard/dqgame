@@ -72,7 +72,7 @@ var enemies = {
 		//new Sprite(scene, x, y, texture [, frame])
 		
 		newEnemy = enemies.getEnemyTemplate();
-		newEnemy.sprite = scene.physics.add.sprite(scene, 100, 450, 'enemy', null);
+		newEnemy.sprite = scene.physics.add.sprite(scene, 100, 450, game.textures.list["enemy"], null);
 		
 		enemies.list.push(newEnemy);
 		
