@@ -17,12 +17,12 @@ let jsLoc = 'assets/js/';
 
 scripts.push(dqGame = document.createElement('script'));
 scripts.push(characters = document.createElement('script'));
-scripts.push(enemies = document.createElement('script'));
+//scripts.push(enemies = document.createElement('script'));
 scripts.push(background = document.createElement('script'));
 
 dqGame.src = jsLoc + 'dqgame.js';
 characters.src = jsLoc + 'characters.js';
-enemies.src = jsLoc + 'enemies.js';
+//enemies.src = jsLoc + 'enemies.js';
 background.src = jsLoc + 'background.js';
 
 

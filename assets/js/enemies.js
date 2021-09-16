@@ -1,20 +1,21 @@
+/*Stitcher*/ {
+
+
 // =============
 //  Object Definition
 // =============
-
 
 enemies = {
 
 	list: [],
 	
-	sprites: [],
+	sprites: {},
 	
 	spawn: function(scene){
 		//new Sprite(scene, x, y, texture [, frame])
 		
 		newEnemy = enemies.getEnemyTemplate();
-		newEnemy.sprite = Object.assign(newEnemy.sprite, enemies.sprites[0]);
-		newEnemy.sprite.visible = true;
+		newEnemy.sprite = scene.physics.add.sprite(scene, 100, 450, 'enemy');
 		
 		enemies.list.push(newEnemy);
 		
@@ -89,11 +90,6 @@ enemies = {
 
 }
 
-// =============
-//  Initialize Enemy List
-// =============
-
-enemies.list.push(enemies.getEnemyTemplate());
 
 // =============
 //  Enemies
@@ -115,4 +111,5 @@ enemies.list.push(enemies.getEnemyTemplate());
 }
 
 enemies.debug();
-//EOF
+
+}

@@ -54,7 +54,125 @@ var player;
 
 var background 	= document.createElement('background.js');
 var characters 	= document.createElement('characters.js');
-var enemies 	= document.createElement('enemies.js');
+//var enemies 	= document.createElement('enemies.js');
+
+
+
+// =============
+//  Start - enemies.js
+// =============
+
+var enemies = {
+
+	list: [],
+	
+	sprites: [],
+	
+	spawn: function(scene){
+		//new Sprite(scene, x, y, texture [, frame])
+		
+		newEnemy = enemies.getEnemyTemplate();
+		newEnemy.sprite = scene.physics.add.sprite(scene, 100, 450, 'enemy', null);
+		
+		enemies.list.push(newEnemy);
+		
+	},
+
+	getEnemyTemplate: function(){
+			
+		enemyTemplate = {
+			
+			name:  'Template Baddicus',
+			
+			sprite: {},
+			
+			stats: {
+				hp: 10,
+				speed: 5,
+				debug(){
+					console.log(this.hp); 
+				}
+			},
+			
+			phrases: {
+				battlecry() {return 'Grrr!';},
+				onDeath() {return 'Ouch!';},
+				debug(){
+					console.log(this.battlecry()); 
+					console.log(this.onDeath()); 
+				}
+			},
+			
+			abilities: {
+				shoot() {
+					console.log('pew pew, but evil!');
+					return true;
+				},
+				special() {
+					console.log('shopping cart toss!');
+					return true;
+				},
+				debug(){
+					console.log(this.shoot()); 
+					console.log(this.special());
+				}
+			},
+			debug: function() {
+								console.log(this.name);
+								this.stats.debug();
+								this.phrases.debug();
+								this.abilities.debug();
+								console.log('');
+							}
+		}
+		
+		return enemyTemplate;
+	},
+	
+	debug: function() {
+		console.log("ENEMIES DEBUG LOG::");
+		console.log("");
+		this.list.forEach(enmy => {
+			enmy.debug();
+		});
+		console.log("==========");
+		console.log("");
+	},
+	
+	update: function(scene){
+		if (enemies.list.length <= 5) {
+			enemies.spawn(scene);
+		}
+	}
+
+}
+
+
+// =============
+//  Enemies
+// =============
+
+{	/*Tankicus*/	let newEnemy = enemies.getEnemyTemplate();
+
+	//Properties
+	newEnemy.name = 'Tankicus'
+	newEnemy.stats.hp = 100;
+	newEnemy.stats.speed = 2;
+	newEnemy.abilities.shoot = function() {
+		console.log('click.');
+		return true;
+	}
+
+	//Add to enemy array
+	enemies.list.push(newEnemy);
+}
+
+enemies.debug();
+
+// =============
+//  EOF - enemies.js
+// =============
+
 
 
 // =============
@@ -101,13 +219,8 @@ function create ()
     player = this.physics.add.sprite(100, 450, 'friend');	// The player and its settings	
     cursors = this.input.keyboard.createCursorKeys(); //  Input Events	
 	
-	//assign sprites to enemy array
-	enemySprite = this.physics.add.sprite(100, 450, 'enemy');
-	enemySprite.visible = false
-	enemies.sprites.push(enemySprite);
 	
 }
-
 
 
 
