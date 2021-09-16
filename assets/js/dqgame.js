@@ -75,10 +75,9 @@ let backgroundLoaded = false;
 
 function preload ()
 {	
-	console.log('attempt3');
 
-    this.load.image('friend', './img/friend.png');
-    this.load.image('enemy', './img/enemy.png');
+    this.load.image('friend', './assets/img/friend.png');
+    this.load.image('enemy', './assets/img/enemy.png');
 
 	
 	if (background.update !== undefined) {	backgroundLoaded = true; }
