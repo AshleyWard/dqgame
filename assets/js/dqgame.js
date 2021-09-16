@@ -6,7 +6,7 @@
 
 var config = {
     type: Phaser.AUTO,
-    width: 850,
+    width: 800,
     height: 650,
 	backgroundColor: 0x200A4C,
     physics: {
@@ -80,6 +80,11 @@ let backgroundLoaded = false;
 
 function preload ()
 {	
+
+
+    this.load.image('friend', '../img/friend.png');
+    this.load.image('enemy', '../img/enemy.png');
+
 	
 	if (background.update !== undefined) {	backgroundLoaded = true; }
 	if (backgroundLoaded) { loaded = true; }
@@ -96,7 +101,7 @@ function preload ()
 
 function create ()
 {	
-    player = this.physics.add.sprite(100, 450, 'mrheart');	// The player and its settings	
+    player = this.physics.add.sprite(100, 450, 'friend');	// The player and its settings	
     cursors = this.input.keyboard.createCursorKeys(); //  Input Events	
 	
 }
@@ -134,7 +139,7 @@ function update ()
 			characters.list[4].abilities.shoot();
 			player.y -= 5;
 		}	
-		
+		enemies.update(this);
 		background.update(this);
 		
 	} else { preload() }

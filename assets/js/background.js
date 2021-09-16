@@ -7,7 +7,6 @@ background = {
 	contents: [],
 
 	stars: {
-		//new Star(scene [, x] [, y] [, points] [, innerRadius] [, outerRadius] [, fillColor] [, fillAlpha])
 		
 		starList: [],
 		
@@ -15,6 +14,7 @@ background = {
 		frequency: 5,
 	
 		newStar (scene) {
+			//new Star(scene [, x] [, y] [, points] [, innerRadius] [, outerRadius] [, fillColor] [, fillAlpha])
 			
 			let tempStar = scene.add.star(background.width + 20, this.randomY(), 4, this.randomInnerRadius(), this.randomOuterRadius(), 0xFFFFFF);		//Keep innerradius under 8
 			
@@ -22,8 +22,6 @@ background = {
 			tempStar.alpha *= Math.random() * 0.9;
 			
 			this.starList.push(tempStar);
-			
-			console.log(tempStar.alpha);
 			
 		},
 		

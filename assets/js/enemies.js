@@ -2,15 +2,28 @@
 //  Object Definition
 // =============
 
+
 enemies = {
 
 	list: [],
+	
+	spawn: function(scene){
+		//new Sprite(scene, x, y, texture [, frame])
+		
+		newEnemy = enemies.getEnemyTemplate();
+		newEnemy.sprite = scene.physics.add.sprite(scene, 100, 450, 'enemy');
+		
+		enemies.list.push(newEnemy);
+		
+	},
 
 	getEnemyTemplate: function(){
 			
 		enemyTemplate = {
 			
 			name:  'Template Baddicus',
+			
+			sprite: {},
 			
 			stats: {
 				hp: 10,
@@ -63,8 +76,14 @@ enemies = {
 		});
 		console.log("==========");
 		console.log("");
-	}
+	},
 	
+	update: function(scene){
+		if (enemies.list.length <= 5) {
+			enemies.spawn(scene);
+		}
+	}
+
 }
 
 // =============
