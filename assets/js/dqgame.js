@@ -1,86 +1,35 @@
 // =============
-// Main // Setup
+//  ENEMIES
 // =============
 
+//Enemy.js
+class Enemy extends Phaser.GameObjects.Sprite {
+    constructor(config) {
+        super(config.scene, config.x, config.y, 'enemy');
+        config.scene.add.existing(this);
 
-var config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 650,
-	backgroundColor: 0x200A4C,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            debug: false
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-
+        this.setInteractive();
+        this.on('pointerdown',this.clickMe,this);
     }
-};
 
-
-
-// =============
-//Declare Variables
-// =============
-
-var ip;		//142.31.117.86 off cisco -- 142.35.171.147 on cisco -- 2021/08/31
-/*ip fetch*/ {  
-	function text(url) {
-	  return fetch(url).then(res => res.text());
+    clickMe()
+    {
+    	this.alpha-=.1;
+		console.log('i was clickyed');
+    }
+}
+//Enemies.js
+class Enemies {
+	constructor(scene) {
+		this.scene = scene;
+		this.list = [];
+		this.generateEnemies();
+		this.debug();
 	}
-
-	text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
-	  let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
-	  ip = data.match(ipRegex)[0];
-	  console.log(ip);
-	});
-}
-
-
-let gameState = {					//Currently unused
-    player: {},
-    board: {},
-    palette: [0xa7f66c, 0x844cc5],
-    selectedColor: 0x844cc5
-}
-
-var cursors;
-var player;
-
-var background 	= document.createElement('background.js');
-var characters 	= document.createElement('characters.js');
-//var enemies 	= document.createElement('enemies.js');
-
-
-
-// =============
-//  Start - enemies.js
-// =============
-
-var enemies = {
-
-	list: [],
 	
-	sprites: [],
-	
-	spawn: function(scene){
-		//new Sprite(scene, x, y, texture [, frame])
-		
-		newEnemy = enemies.getEnemyTemplate();
-		newEnemy.sprite = scene.physics.add.sprite(scene, 100, 450, game.textures.list["enemy"], null);
-		
-		enemies.list.push(newEnemy);
-		
-	},
-
-	getEnemyTemplate: function(){
+	getEnemyTemplate() {
 			
-		enemyTemplate = {
+		var enemyTemplate = {
 			
 			name:  'Template Baddicus',
 			
@@ -127,9 +76,59 @@ var enemies = {
 		}
 		
 		return enemyTemplate;
-	},
+	}
+	spawn(x,y) {
+		let newEnemy;
+		newEnemy = this.getEnemyTemplate();
+		newEnemy.sprite = new Enemy({scene:this.scene,x:200,y:200});
+		enemies.list.push(newEnemy);
+	}	
+	generateEnemies() {
 	
-	debug: function() {
+		/*Tankicus*/ {	
+		let newEnemy = this.getEnemyTemplate();
+
+		//Properties
+		newEnemy.name = 'Tankicus'
+		newEnemy.stats.hp = 100;
+		newEnemy.stats.speed = 2;
+		newEnemy.abilities.shoot = function() {
+			console.log('click.');
+			return true;
+		}
+		
+		//Sprite
+		newEnemy.sprite = new Enemy({scene:this.scene,x:200,y:200});
+
+		//Add to enemy array
+		this.list.push(newEnemy);
+		}
+		/*Tankicus 2*/ {	
+		let newEnemy = this.getEnemyTemplate();
+
+		//Properties
+		newEnemy.name = 'Tankicus 2'
+		newEnemy.stats.hp = 200;
+		newEnemy.stats.speed = 2;
+		newEnemy.abilities.shoot = function() {
+			console.log('click.');
+			return true;
+		}
+		
+		//Sprite
+		newEnemy.sprite = new Enemy({scene:this.scene,x:400,y:200});
+
+		//Add to enemy array
+		this.list.push(newEnemy);
+		}
+
+	}
+	update (){
+		if (enemies.list.length <= 0) {
+			this.spawn(100, 200);
+		}
+	}
+	debug () {
 		console.log("ENEMIES DEBUG LOG::");
 		console.log("");
 		this.list.forEach(enmy => {
@@ -137,37 +136,74 @@ var enemies = {
 		});
 		console.log("==========");
 		console.log("");
-	},
-	
-	update: function(scene){
-		if (enemies.list.length <= 5) {
-			enemies.spawn(scene);
-		}
+	}
+}
+
+// =============
+// Main // Setup
+// =============
+
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 650,
+	backgroundColor: 0x200A4C,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+
+    }
+};
+
+
+let game = new Phaser.Game(config);
+
+// =============
+//Declare Variables
+// =============
+
+var ip;		//142.31.117.86 off cisco -- 142.35.171.147 on cisco -- 2021/08/31
+/*ip fetch*/ {  
+	function text(url) {
+	  return fetch(url).then(res => res.text());
 	}
 
+	text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+	  let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+	  ip = data.match(ipRegex)[0];
+	  console.log(ip);
+	});
 }
 
 
-// =============
-//  Enemies
-// =============
-
-{	/*Tankicus*/	let newEnemy = enemies.getEnemyTemplate();
-
-	//Properties
-	newEnemy.name = 'Tankicus'
-	newEnemy.stats.hp = 100;
-	newEnemy.stats.speed = 2;
-	newEnemy.abilities.shoot = function() {
-		console.log('click.');
-		return true;
-	}
-
-	//Add to enemy array
-	enemies.list.push(newEnemy);
+let gameState = {					//Currently unused
+    player: {},
+    board: {},
+    palette: [0xa7f66c, 0x844cc5],
+    selectedColor: 0x844cc5
 }
 
-enemies.debug();
+var cursors;
+var player;
+var enemies;
+
+var background 	= document.createElement('background.js');
+var characters 	= document.createElement('characters.js');
+//var enemies 	= document.createElement('enemies.js');
+
+
+
+// =============
+//  Start - enemies.js
+// =============
 
 // =============
 //  EOF - enemies.js
@@ -178,8 +214,6 @@ enemies.debug();
 // =============
 // GAME
 // =============
-
-let game = new Phaser.Game(config);
 
 
 
@@ -219,6 +253,7 @@ function create ()
     player = this.physics.add.sprite(100, 450, 'friend');	// The player and its settings	
     cursors = this.input.keyboard.createCursorKeys(); //  Input Events	
 	
+	enemies = new Enemies(this);
 	
 }
 
@@ -254,7 +289,7 @@ function update ()
 			characters.list[4].abilities.shoot();
 			player.y -= 5;
 		}	
-		enemies.update(this);
+		enemies.update();
 		background.update(this);
 		
 	} else { preload() }
