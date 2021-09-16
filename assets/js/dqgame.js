@@ -72,13 +72,16 @@ let game = new Phaser.Game(config);
 
 let loaded = false;
 let backgroundLoaded = false;
+let imgLoad = false;
 
 function preload ()
 {	
-
-    this.load.image('friend', './assets/img/friend.png');
-    this.load.image('enemy', './assets/img/enemy.png');
-
+	//Only attempt to load images on the first run of preload
+	if (!imgLoad) {
+		this.load.image('friend', './assets/img/friend.png');
+		this.load.image('enemy', './assets/img/enemy.png');
+		imgLoad = true;
+	}
 	
 	if (background.update !== undefined) {	backgroundLoaded = true; }
 	if (backgroundLoaded) { loaded = true; }
