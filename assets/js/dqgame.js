@@ -101,6 +101,11 @@ function create ()
     player = this.physics.add.sprite(100, 450, 'friend');	// The player and its settings	
     cursors = this.input.keyboard.createCursorKeys(); //  Input Events	
 	
+	//assign sprites to enemy array
+	enemySprite = this.physics.add.sprite(100, 450, 'enemy');
+	enemySprite.visible = false
+	enemies.sprites.push(enemySprite);
+	
 }
 
 

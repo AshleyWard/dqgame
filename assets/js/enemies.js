@@ -7,11 +7,14 @@ enemies = {
 
 	list: [],
 	
+	sprites: [],
+	
 	spawn: function(scene){
 		//new Sprite(scene, x, y, texture [, frame])
 		
 		newEnemy = enemies.getEnemyTemplate();
-		newEnemy.sprite = scene.physics.add.sprite(scene, 100, 450, 'enemy');
+		newEnemy.sprite = Object.assign(newEnemy.sprite, enemies.sprites[0]);
+		newEnemy.sprite.visible = true;
 		
 		enemies.list.push(newEnemy);
 		
