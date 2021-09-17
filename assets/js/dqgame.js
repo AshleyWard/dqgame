@@ -43,10 +43,10 @@ class Enemies {
 		let minY = startY - 50;
 		let maxY = startY + 50;
 		
-		let leftWall = false;
-		let rightWall = false;
-		let topWall = false;
-		let bottomWall = false;
+		let leftWall	= enSprite.x == minX;
+		let rightWall	= enSprite.x == maxX;
+		let topWall		= enSprite.y == minY;
+		let bottomWall	= enSprite.y == maxY;
 		
 		//We've just started moving - we'll not be on the outside of the bounding box yet!
 		if (enSprite.x > minX && enSprite.x < maxX && enSprite.y > minY && enSprite.y < maxY ) {
