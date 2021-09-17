@@ -163,11 +163,10 @@ class Enemies {
 
 	}
 	update (){
-		if (enemies.list.length <= 0) {
+		if (this.list.length <= 0) {
 			this.spawn(100, 200);
 		}
-		if (enemies.list.length > 0) {
-			console.log('124-345t542jt954j2w39yt4532q');
+		if (this.list.length > 0) {
 			this.patrol(this.list[0], this.list[0].sprite.x, this.list[0].sprite.y);
 		}
 	}
