@@ -53,35 +53,34 @@ class Enemies {
 			enSprite.x += speed;
 			if (enSprite.x >= maxX) {
 				enSprite.x = maxX;
-				rightWall = true;
 			}
 		} else if (rightWall) {
-			enSprite.y -= speed;
-			if (enSprite.y <= minY) {
-				enSprite.y 	= minY;
-				rightWall 	= false;
-				topWall 	= true;
+			if (topWall) {enSprite.x -= speed} else {
+				enSprite.y -= speed;
+				if (enSprite.y <= minY) {
+					enSprite.y 	= minY;
+				}
 			}
 		} else if (topWall) {
-			enSprite.x -= speed;
-			if (enSprite.x <= minX) {
-				enSprite.x 	= minX;
-				topWall 	= false;
-				leftWall 	= true;
+			if (leftWall) {enSprite.y += speed} else {
+				enSprite.x -= speed;
+				if (enSprite.x <= minX) {
+					enSprite.x 	= minX;
+				}
 			}
 		} else if (leftWall) {
-			enSprite.y += speed;
-			if (enSprite.y >= maxY) {
-				enSprite.y 	= maxY;
-				leftWall 	= false;
-				bottomWall 	= true;
+			if (bottomWall) {enSprite.x += speed} {
+				enSprite.y += speed;
+				if (enSprite.y >= maxY) {
+					enSprite.y 	= maxY;
+				}
 			}
 		} else if (bottomWall) {
-			enSprite.x += speed;
-			if (enSprite.x >= maxX) {
-				enSprite.x 	= maxX;
-				bottomWall 	= false;
-				rightWall 	= true;
+			if (rightWall) {enSprite.y -= speed} else {
+				enSprite.x += speed;
+				if (enSprite.x >= maxX) {
+					enSprite.x 	= maxX;
+				}
 			}
 		}
 	}
