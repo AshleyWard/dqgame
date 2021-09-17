@@ -166,7 +166,9 @@ class Enemies {
 		if (enemies.list.length <= 0) {
 			this.spawn(100, 200);
 		}
-		this.patrol(this.list[0], this.list[0].sprite.x, this.list[0].sprite.y);
+		if (enemies.list.length > 0) {
+			this.patrol(this.list[0], this.list[0].sprite.x, this.list[0].sprite.y);
+		}
 	}
 	debug () {
 		console.log("ENEMIES DEBUG LOG::");
