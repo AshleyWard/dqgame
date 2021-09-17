@@ -61,7 +61,7 @@ class Enemies {
 		} else if 	(enSprite.x >= maxX) {
 			enSprite.x = maxX;
 			//Start heading up
-			if (enSprite.y <= minY) {
+			if (enSprite.y > minY) {
 				enSprite.y -= speed;
 			//We've hit the top
 			} else if (enSprite.y <= minY) {
