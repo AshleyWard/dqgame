@@ -33,15 +33,15 @@ class Enemies {
 		enemies.list.push(newEnemy);
 	}	
 	
-	patrol(enemy, startX, startY) {
+	patrol(enemy, startX, startY, radius) {
 		let enSprite = enemy.sprite
 		
 		let speed = enemy.stats.speed
 		
-		let minX = startX - 50;
-		let maxX = startX + 50;
-		let minY = startY - 50;
-		let maxY = startY + 50;
+		let minX = startX - radius;
+		let maxX = startX + radius;
+		let minY = startY - radius;
+		let maxY = startY + radius;
 		
 		let leftWall	= enSprite.x == minX;
 		let rightWall	= enSprite.x == maxX;
@@ -151,7 +151,7 @@ class Enemies {
 		}
 		
 		//Sprite
-		newEnemy.sprite = new Enemy({scene:this.scene,x:200,y:200});
+		newEnemy.sprite = new Enemy({scene:this.scene,x:650,y:300});
 
 		//Add to enemy array
 		this.list.push(newEnemy);
@@ -169,7 +169,7 @@ class Enemies {
 		}
 		
 		//Sprite
-		newEnemy.sprite = new Enemy({scene:this.scene,x:400,y:200});
+		newEnemy.sprite = new Enemy({scene:this.scene,x:620,y:550});
 
 		//Add to enemy array
 		this.list.push(newEnemy);
@@ -181,8 +181,8 @@ class Enemies {
 			this.spawn(100, 200);
 		}
 		if (this.list.length > 0) {
-			this.patrol(this.list[0], 200, 200);
-			this.patrol(this.list[1], 400, 200);
+			this.patrol(this.list[0], 600, 200, 100);
+			this.patrol(this.list[1], 700, 450, 100);
 		}
 	}
 	debug () {
