@@ -1,4 +1,4 @@
-
+/*		Archived
 class Enemies {
 	var scene;
 	var list = [];
@@ -82,7 +82,7 @@ class Enemies {
 	//  Enemies
 	// =============
 
-	{	/*Tankicus*/	let newEnemy = enemies.getEnemyTemplate();
+	{	let newEnemy = enemies.getEnemyTemplate();
 
 		//Properties
 		newEnemy.name = 'Tankicus'
@@ -98,7 +98,7 @@ class Enemies {
 	}
 	
 }
-
+*/
 
 /*	Before Class Conversion
 

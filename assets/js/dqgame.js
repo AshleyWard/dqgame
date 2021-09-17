@@ -11,7 +11,6 @@ class Enemy extends Phaser.GameObjects.Sprite {
         this.setInteractive();
         this.on('pointerdown',this.clickMe,this);
     }
-
     clickMe()
     {
     	this.alpha-=.1;
@@ -27,6 +26,51 @@ class Enemies {
 		this.debug();
 	}
 	
+	spawn(x,y) {
+		let newEnemy;
+		newEnemy = this.getEnemyTemplate();
+		newEnemy.sprite = new Enemy({scene:this.scene,x:200,y:200});
+		enemies.list.push(newEnemy);
+	}	
+	
+	patrol(enemy, startX, startY) {
+		let enSprite = enemy.sprite
+		
+		let minX = startX - 50;
+		let maxX = startX + 50;
+		let minY = startY - 50;
+		let maxY = startY + 50;
+		
+		//We've just started moving - we'll not be on the outside of the bounding box yet!
+		if (enSprite.x !== minX && enSprite.x !== maxX && enSprite.y !== minY && enSprite.y !== maxY ) {
+			enSprite.x += enemy.stats.speed;
+			
+		//We're on the left wall
+		} else if 	(enSprite.x <= minX) {
+			enSprite.x = minX;
+			//Start heading down
+			if (enSprite.y <= maxY) {
+				enSprite.y += speed;
+			//We've hit the bottom
+			} else if (enSprite.y >= maxY) {
+				enSprite.y = maxY;
+			}
+		//We're on the right wall
+		} else if 	(enSprite.x >= maxX) {
+			enSprite.x = maxX;
+			//Start heading up
+			if (enSprite.y <= minY) {
+				enSprite.y -= speed;
+			//We've hit the top
+			} else if (enSprite.y <= minY) {
+				enSprite.y = minY;
+			}
+		} else {
+			console.log ('not sure, chief. patrolling has stopped.');
+		}
+		
+	}
+
 	getEnemyTemplate() {
 			
 		var enemyTemplate = {
@@ -53,6 +97,7 @@ class Enemies {
 			},
 			
 			abilities: {
+				
 				shoot() {
 					console.log('pew pew, but evil!');
 					return true;
@@ -77,12 +122,6 @@ class Enemies {
 		
 		return enemyTemplate;
 	}
-	spawn(x,y) {
-		let newEnemy;
-		newEnemy = this.getEnemyTemplate();
-		newEnemy.sprite = new Enemy({scene:this.scene,x:200,y:200});
-		enemies.list.push(newEnemy);
-	}	
 	generateEnemies() {
 	
 		/*Tankicus*/ {	
@@ -127,6 +166,7 @@ class Enemies {
 		if (enemies.list.length <= 0) {
 			this.spawn(100, 200);
 		}
+		patrol(this.list[0], this.list[0].sprite.x, this.list[0].sprite.y);
 	}
 	debug () {
 		console.log("ENEMIES DEBUG LOG::");
