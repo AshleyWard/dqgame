@@ -36,6 +36,8 @@ class Enemies {
 	patrol(enemy, startX, startY) {
 		let enSprite = enemy.sprite
 		
+		let speed = enemy.stats.speed
+		
 		let minX = startX - 50;
 		let maxX = startX + 50;
 		let minY = startY - 50;
@@ -43,7 +45,7 @@ class Enemies {
 		
 		//We've just started moving - we'll not be on the outside of the bounding box yet!
 		if (enSprite.x !== minX && enSprite.x !== maxX && enSprite.y !== minY && enSprite.y !== maxY ) {
-			enSprite.x += enemy.stats.speed;
+			enSprite.x += espeed;
 			
 		//We're on the left wall
 		} else if 	(enSprite.x <= minX) {
