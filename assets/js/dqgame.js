@@ -167,6 +167,7 @@ class Enemies {
 			this.spawn(100, 200);
 		}
 		if (enemies.list.length > 0) {
+			console.log('124-345t542jt954j2w39yt4532q');
 			this.patrol(this.list[0], this.list[0].sprite.x, this.list[0].sprite.y);
 		}
 	}
