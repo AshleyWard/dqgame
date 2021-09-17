@@ -43,34 +43,47 @@ class Enemies {
 		let minY = startY - 50;
 		let maxY = startY + 50;
 		
-		//We've just started moving - we'll not be on the outside of the bounding box yet!
-		if (enSprite.x !== minX && enSprite.x !== maxX && enSprite.y !== minY && enSprite.y !== maxY ) {
-			enSprite.x += espeed;
-			
-		//We're on the left wall
-		} else if 	(enSprite.x <= minX) {
-			enSprite.x = minX;
-			//Start heading down
-			if (enSprite.y <= maxY) {
-				enSprite.y += speed;
-			//We've hit the bottom
-			} else if (enSprite.y >= maxY) {
-				enSprite.y = maxY;
-			}
-		//We're on the right wall
-		} else if 	(enSprite.x >= maxX) {
-			enSprite.x = maxX;
-			//Start heading up
-			if (enSprite.y > minY) {
-				enSprite.y -= speed;
-			//We've hit the top
-			} else if (enSprite.y <= minY) {
-				enSprite.y = minY;
-			}
-		} else {
-			console.log ('not sure, chief. patrolling has stopped.');
-		}
+		let leftWall = false;
+		let rightWall = false;
+		let topWall = false;
+		let bottomWall = false;
 		
+		//We've just started moving - we'll not be on the outside of the bounding box yet!
+		if (enSprite.x > minX && enSprite.x < maxX && enSprite.y > minY && enSprite.y < maxY ) {
+			enSprite.x += speed;
+			if (enSprite.x >= maxX) {
+				enSprite.x = maxX;
+				rightWall = true;
+			}
+		} else if (rightWall) {
+			enSprite.y -= speed;
+			if (enSprite.y <= minY) {
+				enSprite.y 	= minY;
+				rightWall 	= false;
+				topWall 	= true;
+			}
+		} else if (topWall) {
+			enSprite.x -= speed;
+			if (enSprite.x <= minX) {
+				enSprite.x 	= minX;
+				topWall 	= false;
+				leftWall 	= true;
+			}
+		} else if (leftWall) {
+			enSprite.y += speed;
+			if (enSprite.y >= maxY) {
+				enSprite.y 	= maxY;
+				leftWall 	= false;
+				bottomWall 	= true;
+			}
+		} else if (bottomWall) {
+			enSprite.x += speed;
+			if (enSprite.x >= maxX) {
+				enSprite.x 	= maxX;
+				bottomWall 	= false;
+				rightWall 	= true;
+			}
+		}
 	}
 
 	getEnemyTemplate() {
