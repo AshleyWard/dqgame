@@ -167,7 +167,8 @@ class Enemies {
 			this.spawn(100, 200);
 		}
 		if (this.list.length > 0) {
-			this.patrol(this.list[0], this.list[0].sprite.x, this.list[0].sprite.y);
+			this.patrol(this.list[0], 250, 250);
+			this.patrol(this.list[1], 350, 350);
 		}
 	}
 	debug () {
